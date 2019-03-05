@@ -5,7 +5,7 @@
         remoteOperations: { paging: true, filtering: true, sorting: true, grouping: true, summary: true, groupPaging: true },
         dataSource: DevExpress.data.AspNet.createStore({
             key: "CustomerID",
-            loadUrl: "api/",
+            loadUrl: "api/Customers",
         }),
         editing: {
             mode: "form",
@@ -44,7 +44,7 @@
                         paginate: true,
                         store: DevExpress.data.AspNet.createStore({
                             key: "CustomerID",
-                            loadUrl: "api/"
+                            loadUrl: "api/Customers"
                         })
                     }
                 }
@@ -60,7 +60,7 @@
                         paginate: true,
                         store: DevExpress.data.AspNet.createStore({
                             key: "CustomerID",
-                            loadUrl: "api/"
+                            loadUrl: "api/Customers"
                         })
                     }
                 }
@@ -76,7 +76,7 @@
                         paginate: true,
                         store: DevExpress.data.AspNet.createStore({
                             key: "CustomerID",
-                            loadUrl: "api/"
+                            loadUrl: "api/Customers"
                         })
                     }
                 }
