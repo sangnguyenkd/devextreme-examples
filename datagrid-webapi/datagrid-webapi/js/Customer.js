@@ -88,13 +88,13 @@
         $("<div>").addClass("grid").appendTo(container).dxDataGrid({
             remoteOperations: true,
             dataSource: {
-                filter: ["CustomerID", "=", options.key],
+                filter: ["OrderID", "=", options.key],
                 store: DevExpress.data.AspNet.createStore({
-                    key: ["CustomerID", "OrderID"],
-                    loadUrl: "api/Orders",
-                    insertUrl: "api/Orders/Post",
-                    updateUrl: "api/Orders/Put",
-                    deleteUrl: "api/Orders/Delete",
+                    key: ["OrderID", "ProductID"],
+                    loadUrl: "api/OrderDetails",
+                    insertUrl: "api/OrderDetails/Post",
+                    updateUrl: "api/OrderDetails/Put",
+                    deleteUrl: "api/OrderDetails/Delete",
                 })
             },
             showBorders: true,
@@ -111,7 +111,7 @@
                 }
             },
             onEditorPreparing: function (e) {
-                if (e.dataField === "OderID") {
+                if (e.dataField === "ProductID") {
                     var dataGrid = e.component;
                     var valueChanged = e.editorOptions.onValueChanged;
                     e.editorOptions.onValueChanged = function (args) {
@@ -124,7 +124,34 @@
                         }
                     }
                 }
-            }
+            },
+            summary: {
+                totalItems: [
+                    { column: "Total", summaryType: "sum", displayFormat: "Total: {0}", valueFormat: { type: "currency", precision: 2 } }
+                ]
+            },
+            columns: [
+                {
+                    dataField: "ProductID",
+                    caption: "Product 12",
+                    calculateDisplayValue: "ProductName",
+                    lookup: {
+                        valueExpr: "ProductID",
+                        displayExpr: "ProductName",
+                        dataSource: {
+                            paginate: true,
+                            store: DevExpress.data.AspNet.createStore({
+                                key: "ProductID",
+                                loadUrl: "api/Products"
+                            })
+                        }
+                    }
+                },
+                { dataField: "UnitPrice", format: { type: "currency", precision: 2 }, allowEditing: false },
+                "Quantity",
+                "Discount",
+                { dataField: "Total", format: { type: "currency", precision: 2 }, allowEditing: false, calculateCellValue: function (data) { return data.UnitPrice ? data.UnitPrice * data.Quantity * (1 - data.Discount) : null } }
+            ]
         })
     }
 });
