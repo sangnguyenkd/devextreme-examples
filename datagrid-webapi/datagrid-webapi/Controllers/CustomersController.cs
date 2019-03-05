@@ -12,9 +12,29 @@ namespace datagrid_webapi.Controllers
     public class CustomersController : ApiController
     {
         private Northwind _db = new Northwind();
+        [HttpGet]
         public HttpResponseMessage Get(DataSourceLoadOptions loadOptions)
         {
-            return Request.CreateResponse(DataSourceLoader.Load(_db.Customers, loadOptions));
+            loadOptions.PrimaryKey = new[] { "CustomerID" };
+
+            var customers = from c in _db.Customers
+                         select new
+                         {
+                             c.Address,
+                             c.City,
+                             c.CompanyName,
+                             c.ContactName,
+                             c.ContactTitle,
+                             c.Country,
+                             c.CustomerID,
+                             c.Fax,
+                             c.Orders,
+                             c.Phone,
+                             c.PostalCode,
+                             c.Region
+                         };
+
+            return Request.CreateResponse(DataSourceLoader.Load(customers, loadOptions));
         }
     }
 }
