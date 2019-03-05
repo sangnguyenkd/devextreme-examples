@@ -127,7 +127,7 @@
     <Content Include="Global.asax" />
     <Content Include="Index.html" />
     <Content Include="js\code.js" />
-    <Content Include="js\test.js" />
+    <Content Include="js\Customer.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
