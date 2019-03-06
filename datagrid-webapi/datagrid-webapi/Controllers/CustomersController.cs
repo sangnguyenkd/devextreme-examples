@@ -31,6 +31,7 @@ namespace datagrid_webapi.Controllers
                                 cm.CustomerID,
                                 cm.ContactName,
                                 cm.City,
+                                cm.CompanyName,
                                 OrderQuantity = (from o in _db.Orders
                                                 where o.CustomerID == cm.CustomerID
                                                 select o).Count()
@@ -41,7 +42,7 @@ namespace datagrid_webapi.Controllers
         [HttpPut]
         public HttpResponseMessage Put(FormDataCollection form)
         {
-            var key = Convert.ToInt32(form.Get("key"));
+            var key = Convert.ToString(form.Get("key"));
             var values = form.Get("values");
 
             var customer = _db.Customers.Find(key);
@@ -78,7 +79,7 @@ namespace datagrid_webapi.Controllers
         [HttpDelete]
         public HttpResponseMessage Delete(FormDataCollection form)
         {
-            var key = Convert.ToInt32(form.Get("key"));
+            var key = Convert.ToString(form.Get("key"));
             var customer = _db.Customers.Find(key);
             _db.Customers.Remove(customer);
             _db.SaveChanges();

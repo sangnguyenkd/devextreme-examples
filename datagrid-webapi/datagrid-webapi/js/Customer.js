@@ -9,6 +9,9 @@
         dataSource: DevExpress.data.AspNet.createStore({
             key: "CustomerID",
             loadUrl: "api/Customers",
+            insertUrl: "api/Customers/Post",
+            updateUrl: "api/Customers/Put",
+            deleteUrl: "api/Customers/Delete",
         }),
         editing: {
             mode: "form",
@@ -37,52 +40,25 @@
         },
         columns: [
             {
-                caption: "CustomerName",
-                calculateDisplayValue: "ContactName",
                 dataField: "CustomerID",
-                lookup: {
-                    valueExpr: "CustomerID",
-                    displayExpr: "ContactName",
-                    dataSource: {
-                        paginate: true,
-                        store: DevExpress.data.AspNet.createStore({
-                            key: "CustomerID",
-                            loadUrl: "api/Customers"
-                        })
-                    }
-                }
+                caption: "Customer ID"
             },
             {
-                caption: "City",
-                calculateDisplayValue: "City",
+                dataField: "CompanyName",
+                caption: "Company Name"
+            },
+            {
+                dataField: "ContactName",
+                caption: "Contact Name"
+            },
+            {
                 dataField: "City",
-                lookup: {
-                    valueExpr: "CustomerID",
-                    displayExpr: "City",
-                    dataSource: {
-                        paginate: true,
-                        store: DevExpress.data.AspNet.createStore({
-                            key: "CustomerID",
-                            loadUrl: "api/Customers"
-                        })
-                    }
-                }
+                caption: "City"
+                
             },
             {
-                caption: "OrderQuantity",
-                calculateDisplayValue: "OrderQuantity",
                 dataField: "OrderQuantity",
-                lookup: {
-                    valueExpr: "CustomerID",
-                    displayExpr: "City",
-                    dataSource: {
-                        paginate: true,
-                        store: DevExpress.data.AspNet.createStore({
-                            key: "CustomerID",
-                            loadUrl: "api/Customers"
-                        })
-                    }
-                }
+                caption: "OrderQuantity"
             }
         ]
     });
@@ -93,7 +69,7 @@
             dataSource: {
                 filter: ["CustomerID", "=", options.key],
                 store: DevExpress.data.AspNet.createStore({
-                    key: ["OrderID"],
+                    key: "OrderID",
                     loadUrl: "api/Orders",
                     insertUrl: "api/Orders/Post",
                     updateUrl: "api/Orders/Put",
@@ -108,24 +84,7 @@
             },
             onInitNewRow: function (e) {
                 e.data = {
-                    OrderID: options.key,
-                    Quantity: 1,
-                    Discount: 0
-                }
-            },
-            onEditorPreparing: function (e) {
-                if (e.dataField === "ProductID") {
-                    var dataGrid = e.component;
-                    var valueChanged = e.editorOptions.onValueChanged;
-                    e.editorOptions.onValueChanged = function (args) {
-                        valueChanged.apply(this, arguments);
-
-                        var product = args.component.getDataSource().items().filter(function (data) { return data.ProductID === args.value })[0];
-
-                        if (product) {
-                            dataGrid.cellValue(e.row.rowIndex, "UnitPrice", product.UnitPrice);
-                        }
-                    }
+                    CustomerID: options.key
                 }
             },
             columns: [
