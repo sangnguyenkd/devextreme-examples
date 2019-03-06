@@ -19,3 +19,5 @@ systemjs-angular-globalize/dist
 rollup-angular/dist
 rollup-angular/src/aot
 webpack-angular-globalize/dist
+/datagrid-webapi/datagrid-webapi/App_Data/Northwind.mdf
+/datagrid-webapi/datagrid-webapi/App_Data/Northwind_log.ldf

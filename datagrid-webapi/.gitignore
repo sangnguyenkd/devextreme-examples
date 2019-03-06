@@ -5,3 +5,4 @@ obj
 packages
 Northwind_log.ldf
 datagrid-webapi/lib
+datagrid-webapi/datagrid-webapi/App_Data/*
