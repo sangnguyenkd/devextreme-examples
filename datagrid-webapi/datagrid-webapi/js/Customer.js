@@ -6,18 +6,22 @@
     $("#grid1").dxDataGrid({
         height: 800,
         remoteOperations: { paging: true, filtering: true, sorting: true, grouping: true, summary: true, groupPaging: true },
+        
         dataSource: DevExpress.data.AspNet.createStore({
             key: "CustomerID",
             loadUrl: "api/Customers",
+            insertUrl: "api/Customers/Post",
+            updateUrl: "api/Customers/Put",
+            deleteUrl: "api/Customers/Delete",
         }),
         editing: {
             mode: "form",
             form: {
-                colCount: 4
+                colCount: 4,
             },
             allowUpdating: true,
             allowAdding: true,
-            allowDeleting: true
+            allowDeleting: true,
         },
         onInitNewRow: function (e) {
             e.data = {
@@ -37,53 +41,28 @@
         },
         columns: [
             {
-                caption: "CustomerName",
-                calculateDisplayValue: "ContactName",
-                dataField: "CustomerID",
-                lookup: {
-                    valueExpr: "CustomerID",
-                    displayExpr: "ContactName",
-                    dataSource: {
-                        paginate: true,
-                        store: DevExpress.data.AspNet.createStore({
-                            key: "CustomerID",
-                            loadUrl: "api/Customers"
-                        })
-                    }
-                }
+                caption: "Customer ID",
+                dataField: "CustomerID"
+            },
+            {
+                caption: "Customer Name",
+                dataField: "ContactName"
+            },
+            {
+                caption: "Company",
+                dataField: "CompanyName"
             },
             {
                 caption: "City",
-                calculateDisplayValue: "City",
-                dataField: "City",
-                lookup: {
-                    valueExpr: "CustomerID",
-                    displayExpr: "City",
-                    dataSource: {
-                        paginate: true,
-                        store: DevExpress.data.AspNet.createStore({
-                            key: "CustomerID",
-                            loadUrl: "api/Customers"
-                        })
-                    }
-                }
+                dataField: "City"
             },
             {
                 caption: "OrderQuantity",
-                calculateDisplayValue: "OrderQuantity",
                 dataField: "OrderQuantity",
-                lookup: {
-                    valueExpr: "CustomerID",
-                    displayExpr: "City",
-                    dataSource: {
-                        paginate: true,
-                        store: DevExpress.data.AspNet.createStore({
-                            key: "CustomerID",
-                            loadUrl: "api/Customers"
-                        })
-                    }
+                formItem: {
+                    visible: false,
                 }
-            }
+            },
         ]
     });
 
@@ -93,7 +72,7 @@
             dataSource: {
                 filter: ["CustomerID", "=", options.key],
                 store: DevExpress.data.AspNet.createStore({
-                    key: ["OrderID"],
+                    key: "OrderID",
                     loadUrl: "api/Orders",
                     insertUrl: "api/Orders/Post",
                     updateUrl: "api/Orders/Put",
@@ -114,7 +93,7 @@
                 }
             },
             onEditorPreparing: function (e) {
-                if (e.dataField === "ProductID") {
+                if (e.dataField === "OrderID") {
                     var dataGrid = e.component;
                     var valueChanged = e.editorOptions.onValueChanged;
                     e.editorOptions.onValueChanged = function (args) {
