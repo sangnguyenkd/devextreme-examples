@@ -6,6 +6,9 @@
         dataSource: DevExpress.data.AspNet.createStore({
             key: "CustomerID",
             loadUrl: "api/Customers",
+            insertUrl: "api/Customers/Post",
+            updateUrl: "api/Customers/Put",
+            deleteUrl: "api/Customers/Delete",
         }),
         editing: {
             mode: "form",
@@ -34,52 +37,28 @@
         },
         columns: [
             {
-                caption: "CustomerName",
-                calculateDisplayValue: "ContactName",
+                caption: "Customer ID",
+
                 dataField: "CustomerID",
-                lookup: {
-                    valueExpr: "CustomerID",
-                    displayExpr: "ContactName",
-                    dataSource: {
-                        paginate: true,
-                        store: DevExpress.data.AspNet.createStore({
-                            key: "CustomerID",
-                            loadUrl: "api/Customers"
-                        })
-                    }
-                }
+
+            },
+            {
+                caption: "Customer Name",
+              
+                dataField: "ContactName",
+               
             },
             {
                 caption: "City",
-                calculateDisplayValue: "City",
+               
                 dataField: "City",
-                lookup: {
-                    valueExpr: "CustomerID",
-                    displayExpr: "City",
-                    dataSource: {
-                        paginate: true,
-                        store: DevExpress.data.AspNet.createStore({
-                            key: "CustomerID",
-                            loadUrl: "api/Customers"
-                        })
-                    }
-                }
+                
             },
+          
             {
-                caption: "OrderQuantity",
-                calculateDisplayValue: "OrderQuantity",
-                dataField: "OrderQuantity",
-                lookup: {
-                    valueExpr: "CustomerID",
-                    displayExpr: "City",
-                    dataSource: {
-                        paginate: true,
-                        store: DevExpress.data.AspNet.createStore({
-                            key: "CustomerID",
-                            loadUrl: "api/Customers"
-                        })
-                    }
-                }
+                caption: "Company Name",
+               
+                dataField: "CompanyName",
             }
         ]
     });

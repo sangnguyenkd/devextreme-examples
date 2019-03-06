@@ -28,6 +28,7 @@ namespace datagrid_webapi.Controllers
             var customers = from cm in _db.Customers
                             select new
                             {
+                                cm.CompanyName,
                                 cm.CustomerID,
                                 cm.ContactName,
                                 cm.City,
@@ -41,7 +42,7 @@ namespace datagrid_webapi.Controllers
         [HttpPut]
         public HttpResponseMessage Put(FormDataCollection form)
         {
-            var key = Convert.ToInt32(form.Get("key"));
+            var key = form.Get("key");
             var values = form.Get("values");
 
             var customer = _db.Customers.Find(key);
@@ -78,7 +79,7 @@ namespace datagrid_webapi.Controllers
         [HttpDelete]
         public HttpResponseMessage Delete(FormDataCollection form)
         {
-            var key = Convert.ToInt32(form.Get("key"));
+            var key = form.Get("key");
             var customer = _db.Customers.Find(key);
             _db.Customers.Remove(customer);
             _db.SaveChanges();
