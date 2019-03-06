@@ -125,32 +125,19 @@
                     }
                 }
             },
-            summary: {
-                totalItems: [
-                    { column: "Total", summaryType: "sum", displayFormat: "Total: {0}", valueFormat: { type: "currency", precision: 2 } }
-                ]
-            },
             columns: [
                 {
-                    dataField: "ProductID",
-                    caption: "Product 12",
-                    calculateDisplayValue: "ProductName",
-                    lookup: {
-                        valueExpr: "ProductID",
-                        displayExpr: "ProductName",
-                        dataSource: {
-                            paginate: true,
-                            store: DevExpress.data.AspNet.createStore({
-                                key: "ProductID",
-                                loadUrl: "api/Products"
-                            })
-                        }
-                    }
+                    dataField: "OrderID",
+                    caption: "Order ID"
                 },
-                { dataField: "UnitPrice", format: { type: "currency", precision: 2 }, allowEditing: false },
-                "Quantity",
-                "Discount",
-                { dataField: "Total", format: { type: "currency", precision: 2 }, allowEditing: false, calculateCellValue: function (data) { return data.UnitPrice ? data.UnitPrice * data.Quantity * (1 - data.Discount) : null } }
+                {
+                    dataField: "OrderDate",
+                    caption: "Order Date"
+                }
+                {
+                    dataField: "ShipName",
+                    caption: "Ship Name"
+                }
             ]
         })
     }
