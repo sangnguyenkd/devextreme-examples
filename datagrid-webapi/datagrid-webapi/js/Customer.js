@@ -1,6 +1,6 @@
 ﻿$(function () {
 
-    $("#grid").dxDataGrid({
+    $("#grid1").dxDataGrid({
         height: 800,
         remoteOperations: { paging: true, filtering: true, sorting: true, grouping: true, summary: true, groupPaging: true },
         dataSource: DevExpress.data.AspNet.createStore({
