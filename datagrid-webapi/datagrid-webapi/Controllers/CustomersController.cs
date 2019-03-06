@@ -28,7 +28,6 @@ namespace datagrid_webapi.Controllers
             var customers = from cm in _db.Customers
                             select new
                             {
-                                cm.CompanyName,
                                 cm.CustomerID,
                                 cm.CompanyName,
                                 cm.ContactName,
