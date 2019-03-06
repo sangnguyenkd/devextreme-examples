@@ -6,6 +6,7 @@
     $("#grid1").dxDataGrid({
         height: 800,
         remoteOperations: { paging: true, filtering: true, sorting: true, grouping: true, summary: true, groupPaging: true },
+        
         dataSource: DevExpress.data.AspNet.createStore({
             key: "CustomerID",
             loadUrl: "api/Customers",
@@ -16,11 +17,11 @@
         editing: {
             mode: "form",
             form: {
-                colCount: 4
+                colCount: 4,
             },
             allowUpdating: true,
             allowAdding: true,
-            allowDeleting: true
+            allowDeleting: true,
         },
         onInitNewRow: function (e) {
             e.data = {
@@ -40,29 +41,32 @@
         },
         columns: [
             {
-                caption: "Customer ID",
-
-                dataField: "CustomerID",
-
-            },
+                caption: "CustomerName",
+                dataField: "CustomerID"
+               },
             {
                 caption: "Customer Name",
-              
-                dataField: "ContactName",
-               
+                dataField: "ContactName"
+            },
+            {
+                caption: "Company",
+                dataField: "CompanyName"
             },
             {
                 caption: "City",
-               
-                dataField: "City",
+                dataField: "City"
                 
             },
           
             {
-                caption: "Company Name",
-               
-                dataField: "CompanyName",
-            }
+                
+                caption: "OrderQuantity",
+                dataField: "OrderQuantity",
+                formItem: {
+                    visible: false,
+                }
+            
+            },
         ]
     });
 
@@ -72,7 +76,7 @@
             dataSource: {
                 filter: ["CustomerID", "=", options.key],
                 store: DevExpress.data.AspNet.createStore({
-                    key: ["OrderID"],
+                    key: "OrderID",
                     loadUrl: "api/Orders",
                     insertUrl: "api/Orders/Post",
                     updateUrl: "api/Orders/Put",
@@ -93,7 +97,7 @@
                 }
             },
             onEditorPreparing: function (e) {
-                if (e.dataField === "ProductID") {
+                if (e.dataField === "OrderID") {
                     var dataGrid = e.component;
                     var valueChanged = e.editorOptions.onValueChanged;
                     e.editorOptions.onValueChanged = function (args) {

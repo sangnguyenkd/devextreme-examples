@@ -30,6 +30,7 @@ namespace datagrid_webapi.Controllers
                             {
                                 cm.CompanyName,
                                 cm.CustomerID,
+                                cm.CompanyName,
                                 cm.ContactName,
                                 cm.City,
                                 OrderQuantity = (from o in _db.Orders
