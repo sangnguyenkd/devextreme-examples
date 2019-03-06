@@ -88,13 +88,13 @@
         $("<div>").addClass("grid").appendTo(container).dxDataGrid({
             remoteOperations: true,
             dataSource: {
-                filter: ["CustomerID", "=", options.key],
+                filter: ["OrderID", "=", options.key],
                 store: DevExpress.data.AspNet.createStore({
-                    key: ["CustomerID", "OrderID"],
-                    loadUrl: "api/Orders",
-                    insertUrl: "api/Orders/Post",
-                    updateUrl: "api/Orders/Put",
-                    deleteUrl: "api/Orders/Delete",
+                    key: ["OrderID", "ProductID"],
+                    loadUrl: "api/OrderDetails",
+                    insertUrl: "api/OrderDetails/Post",
+                    updateUrl: "api/OrderDetails/Put",
+                    deleteUrl: "api/OrderDetails/Delete",
                 })
             },
             showBorders: true,
