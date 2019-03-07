@@ -3,7 +3,6 @@
     // Update 3
     //Update 4
     // update 5
-    //update 7
     $("#grid1").dxDataGrid({
         height: 800,
         remoteOperations: { paging: true, filtering: true, sorting: true, grouping: true, summary: true, groupPaging: true },
