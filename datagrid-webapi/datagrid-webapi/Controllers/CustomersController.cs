@@ -14,7 +14,7 @@ namespace datagrid_webapi.Controllers
     public class CustomersController : ApiController
     {
         private Northwind _db = new Northwind();
-        //Default code are commended dsadsa
+        //Default code are commended 
         /*public HttpResponseMessage Get(DataSourceLoadOptions loadOptions)
         {
             return Request.CreateResponse(DataSourceLoader.Load(_db.Customers, loadOptions));
